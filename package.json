@@ -1,0 +1,21 @@
+{
+  "name": "exteractive",
+  "version": "1.0.0",
+  "description": "Controller for Exteractive",
+  "main": "index.js",
+  "repository": "https://github.com/ALMSIVI/exteractive.git",
+  "author": "Yue Wu <wuyuejl97@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "cd server && npm run start",
+    "start": "concurrently \"npm run client\" \"npm run server\"",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "build": "npm run build:client && npm run build:server",
+    "clean": "rm -r server/dist"
+  }
+}

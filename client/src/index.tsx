@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Story from './components/story'
 
 console.log('abcde')
-ReactDOM.render(<h1>Exteractive</h1>, document.getElementById('container'))
+ReactDOM.render(<Story />, document.getElementById('container'))
