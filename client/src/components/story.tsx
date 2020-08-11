@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import { css } from '@emotion/core'
 
-
-type StoryState = {text: string}
+type StoryState = { text: string }
 
 class Story extends Component<any, StoryState> {
     constructor(props) {
@@ -16,7 +16,15 @@ class Story extends Component<any, StoryState> {
     }
 
     render() {
-        return <p>{this.state.text}</p>
+        return (
+            <p
+                css={css`
+                    color: red;
+                `}
+            >
+                {this.state.text}
+            </p>
+        )
     }
 }
 
