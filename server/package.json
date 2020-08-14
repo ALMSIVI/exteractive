@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "nodemon",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   }
 }

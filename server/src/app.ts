@@ -4,6 +4,7 @@ import * as path from 'path'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
+const client: MongoClient = new MongoClient(process.env.DB_URI)
 
 const app: Express = express()
 const port = process.env.PORT || 3001
@@ -23,7 +24,5 @@ app.get('/api/hello', async (_, res) => {
 })
 
 app.get('*', (_, res) => res.sendFile(path.resolve(__dirname, 'index.html')))
-
-const client: MongoClient = new MongoClient(process.env.DB_URI)
 
 app.listen(port, () => console.log(`Listening on port ${port}...`))
