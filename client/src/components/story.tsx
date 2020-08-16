@@ -11,8 +11,8 @@ class Story extends Component<any, StoryState> {
 
     componentDidMount() {
         fetch('/api/hello')
-            .then(res => res.text())
-            .then(text => this.setState({ text: text }))
+            .then(res => res.json())
+            .then(json => this.setState({ text: json.text }))
     }
 
     render() {
