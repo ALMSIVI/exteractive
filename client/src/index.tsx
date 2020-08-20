@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Story from './components/story'
+import StoryBoard from './components/storyBoard'
 
 console.log('abcde')
-ReactDOM.render(<Story />, document.getElementById('container'))
+ReactDOM.render(<StoryBoard />, document.getElementById('container'))

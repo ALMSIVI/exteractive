@@ -3,7 +3,7 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Story from '../src/components/story'
+import StoryBoard from '../src/components/storyBoard'
 
 const server = setupServer(rest.get('/api/hello', (req, res, ctx) => res(ctx.json({ text: 'Hello World' }))))
 
@@ -13,7 +13,7 @@ describe('Story rendering', () => {
     afterAll(() => server.close())
 
     test('Loads and displays story', async () => {
-        render(<Story />)
+        render(<StoryBoard />)
         await waitFor(() => screen.getByText('Hello World'))
         expect(screen.getByText('Hello World')).toHaveStyle('color: red')
     })
