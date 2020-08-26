@@ -3,5 +3,5 @@ export interface Story {
     title: string
     text: string
     parent: string
-    children: [string]
+    children: string[]
 }

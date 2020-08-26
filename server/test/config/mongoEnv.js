@@ -11,7 +11,9 @@ module.exports = class MongoEnvironemnt extends NodeEnvironment {
     }
 
     async teardown() {
-        await this.global.client.close()
+        if (this.global.client) {
+            await this.global.client.close()
+        }
         await super.teardown()
     }
 }

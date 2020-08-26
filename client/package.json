@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "heroku-prebuild": "yarn install --production=false",
+    "prebuild": "yarn install --production=false",
     "build": "webpack --mode production",
     "test": "jest"
   },

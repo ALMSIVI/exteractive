@@ -15,11 +15,14 @@
     "dev": "concurrently \"yarn run client\" \"yarn run server\"",
     "build:client": "cd client && yarn run build",
     "build:server": "cd server && yarn run build",
-    "prebuild:client": "cd client && yarn run heroku-prebuild",
-    "prebuild:server": "cd server && yarn run heroku-prebuild",
+    "prebuild:client": "cd client && yarn run prebuild",
+    "prebuild:server": "cd server && yarn run prebuild",
     "heroku-prebuild": "yarn run prebuild:client && yarn run prebuild:server",
     "build": "yarn run build:client && yarn run build:server",
     "start": "cd server && node dist/index.js",
+    "test:client": "cd client && yarn run test",
+    "test:server": "cd server && yarn run test",
+    "test": "yarn run test:client && yarn run test:server",
     "clean": "rm -r server/dist"
   }
 }
