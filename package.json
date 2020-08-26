@@ -2,7 +2,7 @@
   "name": "exteractive",
   "version": "1.0.0",
   "description": "Controller for Exteractive",
-  "main": "index.js",
+  "main": "server/dist/index.js",
   "repository": "https://github.com/ALMSIVI/exteractive.git",
   "author": "Yue Wu <wuyuejl97@gmail.com>",
   "license": "MIT",
@@ -10,12 +10,16 @@
     "concurrently": "^5.2.0"
   },
   "scripts": {
-    "client": "cd client && npm run start",
-    "server": "cd server && npm run start",
-    "start": "concurrently \"npm run client\" \"npm run server\"",
-    "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build",
-    "build": "npm run build:client && npm run build:server",
+    "client": "cd client && yarn run start",
+    "server": "cd server && yarn run start",
+    "dev": "concurrently \"yarn run client\" \"yarn run server\"",
+    "build:client": "cd client && yarn run build",
+    "build:server": "cd server && yarn run build",
+    "prebuild:client": "cd client && yarn run heroku-prebuild",
+    "prebuild:server": "cd server && yarn run heroku-prebuild",
+    "heroku-prebuild": "yarn run prebuild:client && yarn run prebuild:server",
+    "build": "yarn run build:client && yarn run build:server",
+    "start": "cd server && node dist/index.js",
     "clean": "rm -r server/dist"
   }
 }

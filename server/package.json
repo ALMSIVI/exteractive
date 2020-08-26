@@ -28,6 +28,7 @@
   "scripts": {
     "start": "nodemon",
     "build": "tsc",
+    "heroku-prebuild": "yarn install --production=false",
     "test": "jest"
   }
 }
