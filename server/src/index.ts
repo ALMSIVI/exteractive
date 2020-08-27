@@ -1,19 +1,20 @@
-import * as dotenv from 'dotenv'
+import { config } from 'dotenv'
 import { MongoClient, Db } from 'mongodb'
 import app from './app'
 import StoriesDAO from './dao/storiesDAO'
-
-dotenv.config()
-const port = process.env.PORT || 3001
-
+import pino from 'pino'
 ;(async () => {
+    config()
+    const port = process.env.PORT || 3001
+    const logger = pino()
+
     try {
         const client: MongoClient = await MongoClient.connect(process.env.DB_URI)
         const db: Db = client.db('exteractive')
 
         StoriesDAO.inject(db)
 
-        app.listen(port, () => console.log(`Listening on port ${port}...`))
+        app.listen(port, () => logger.info(`Listening on port ${port}...`))
     } catch (e) {
         console.error(e)
     }
