@@ -4,7 +4,7 @@ import { Story } from '../types/stories.types'
 let stories: Collection
 
 export default class StoriesDAO {
-    static inject(db: Db) {
+    static inject(db: Db): void {
         stories = db.collection('stories')
     }
 
