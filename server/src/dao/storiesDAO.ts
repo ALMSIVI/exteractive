@@ -49,12 +49,18 @@ export default class StoriesDAO {
                             connectFromField: 'parent',
                             connectToField: '_id',
                             as: 'tree',
+                            depthField: 'depth',
                         },
                     },
+                    // To maintain order, it is possible to to an $unwind, a $sort, and then a $group.
+                    // However this is overly complicated so the sorting will be handled in the controller.
                     { $project: { _id: 0, tree: 1 } },
                 ])
                 .toArray()
-            return treeWrappers[0].tree
+                
+                const tree = treeWrappers[0].tree
+                tree.sort((s1, s2) => s1.depth - s2.depth)
+            return tree
         } catch (e) {
             logger.error(`Error in getting tree of ${id}: ${e}`)
             return null

@@ -30,11 +30,10 @@ describe('Getting stories', () => {
         try {
             const story = await StoriesDAO.getChildren('5f3603b0b6372b04780a6b4a')
             expect(story[0].title).toBe('Country')
-            console.log(story[0]._id.toHexString())
             const tree = await StoriesDAO.getTree(story[0]._id.toHexString())
             expect(tree.length).toBe(2)
-            expect(tree[0].title).toBe('The Beginning')
-            expect(tree[1].title).toBe('Fantasy')
+            expect(tree[0].title).toBe('Fantasy')
+            expect(tree[1].title).toBe('The Beginning')
         } catch (e) {
             expect(e).toBeNull()
         }

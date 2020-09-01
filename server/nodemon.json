@@ -1,6 +1,5 @@
 {
     "watch": ["src/"],
     "ext": "ts",
-    "exec": "ts-node ./src/index.ts | pino-pretty",
-    "legacyWatch": true
+    "exec": "ts-node ./src/index.ts | pino-pretty"
 }
