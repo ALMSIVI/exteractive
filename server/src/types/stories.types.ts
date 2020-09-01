@@ -1,9 +1,8 @@
-import { ObjectID } from 'mongodb'
+import { ObjectId } from 'mongodb'
 
 export interface Story {
-    id: ObjectID
+    _id?: ObjectId
     title: string
     text: string
-    parent: string
-    children: [ObjectID]
+    parent: ObjectId | string
 }
