@@ -7,5 +7,6 @@ router.route('/root').get(StoriesController.apiGetRoot)
 router.route('/story/:id').get(StoriesController.apiGetStory)
 router.route('/children/:id').get(StoriesController.apiGetChildren)
 router.route('/tree/:id').get(StoriesController.apiGetTree)
+router.route('/recent').get(StoriesController.apiGetRecent)
 
 export default router

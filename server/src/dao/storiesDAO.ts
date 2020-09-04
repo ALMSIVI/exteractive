@@ -49,7 +49,6 @@ export default class StoriesDAO {
                             connectFromField: 'parent',
                             connectToField: '_id',
                             as: 'tree',
-                            depthField: 'depth',
                         },
                     },
                     // To maintain order, it is possible to to an $unwind, a $sort, and then a $group.
@@ -57,12 +56,21 @@ export default class StoriesDAO {
                     { $project: { _id: 0, tree: 1 } },
                 ])
                 .toArray()
-                
-                const tree = treeWrappers[0].tree
-                tree.sort((s1, s2) => s1.depth - s2.depth)
+
+            const tree = treeWrappers[0].tree
+            tree.sort((s1, s2) => s1.depth - s2.depth)
             return tree
         } catch (e) {
             logger.error(`Error in getting tree of ${id}: ${e}`)
+            return null
+        }
+    }
+
+    static async getRecent(): Promise<Story[]> {
+        try {
+            return await stories.find({}, { limit: 10, sort: { date: -1 } }).toArray()
+        } catch (e) {
+            logger.error(`Error in getting recent stories: ${e}`)
             return null
         }
     }

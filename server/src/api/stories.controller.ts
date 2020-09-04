@@ -22,4 +22,9 @@ export default class StoriesController {
         const tree: Story[] = await StoriesDAO.getTree(req.params.id)
         res.json(tree)
     }
+
+    static async apiGetRecent(_: Request, res: Response): Promise<void> {
+        const stories: Story[] = await StoriesDAO.getRecent()
+        res.json(stories)
+    }
 }

@@ -5,5 +5,6 @@ export interface Story {
     title: string
     text: string
     parent: ObjectId | string
-    depth?: number
+    depth: number
+    date: Date
 }

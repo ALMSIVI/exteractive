@@ -32,8 +32,20 @@ describe('Getting stories', () => {
             expect(story[0].title).toBe('Country')
             const tree = await StoriesDAO.getTree(story[0]._id.toHexString())
             expect(tree.length).toBe(2)
-            expect(tree[0].title).toBe('Fantasy')
-            expect(tree[1].title).toBe('The Beginning')
+            expect(tree[0].title).toBe('The Beginning')
+            expect(tree[1].title).toBe('Fantasy')
+        } catch (e) {
+            expect(e).toBeNull()
+        }
+    })
+
+    test('Recent stories can be retrieved', async () => {
+        try {
+            const recents = await StoriesDAO.getRecent()
+            expect(recents.length).toBeLessThanOrEqual(10)
+            const actualDates = recents.map(s => s.date)
+            const expectedDates = actualDates.slice().sort((d1, d2) => d2.getTime() - d1.getTime())
+            expect(actualDates).toEqual(expectedDates)
         } catch (e) {
             expect(e).toBeNull()
         }
