@@ -1,7 +1,20 @@
+import { User } from './users.types'
+
+export enum Reaction {
+    thumbsUp = 'thumbsUp',
+    hooray = 'hooray',
+    heart = 'heart',
+    rocket = 'rocket',
+    eyes = 'eyes'
+}
+
 export interface Story {
-    id: string
+    _id?: string
     title: string
     text: string
     parent: string
-    children: string[]
+    depth: number
+    date: string
+    user: User
+    reactions?: { [key in Reaction]?: number }
 }

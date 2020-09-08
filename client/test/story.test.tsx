@@ -1,19 +1,23 @@
 import React from 'react'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
-import { render, screen, waitFor } from '@testing-library/react'
-import StoryBoard from '../src/components/storyBoard'
-
-const server = setupServer(rest.get('/api/stories/root', (req, res, ctx) => res(ctx.json({ text: 'Hello World' }))))
+import { render, screen, waitFor, store } from './test-utils'
+import StoryBoard from '../src/features/stories/StoryBoard'
+import { Route } from 'react-router-dom'
+import { fetchStories } from '../src/features/stories/storiesSlice'
 
 describe('Story rendering', () => {
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
-
     test('Loads and displays story', async () => {
-        render(<StoryBoard />)
-        await waitFor(() => screen.getByText('Hello World'))
-        expect(screen.getByText('Hello World')).toHaveStyle('color: red')
+        try {
+            store.dispatch(fetchStories())
+            render(
+                <Route path="/story/:storyId">
+                    <StoryBoard />
+                </Route>,
+                { route: '/story/0' }
+            )
+            await waitFor(() => screen.getByText('Text 0'))
+            expect(screen.getByText('Text 0')).toHaveStyle('color: red')
+        } catch (e) {
+            expect(e).toBeNull()
+        }
     })
 })
