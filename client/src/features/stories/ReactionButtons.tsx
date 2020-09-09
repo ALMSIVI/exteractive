@@ -2,6 +2,7 @@ import React from 'react'
 import { reactionAdded } from './storiesSlice'
 import { Story, Reaction } from '../../types/stories.types'
 import { useAppDispatch } from '../../app/store'
+import { Button } from '@material-ui/core'
 
 const reactionEmoji: { [key in Reaction]: string } = {
     thumbsUp: '👍',
@@ -19,13 +20,12 @@ export const ReactionButtons = ({ story }: ReactionButtonsProps) => {
 
     const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
         return (
-            <button
+            <Button
                 key={name}
-                type="button"
                 onClick={() => dispatch(reactionAdded({ storyId: story._id, reaction: Reaction[name] }))}
             >
                 {emoji} {reactions[name] || 0}
-            </button>
+            </Button>
         )
     })
 

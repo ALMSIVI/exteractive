@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { fetchNotifications, selectAllNotifications } from '../features/notifications/notificationsSlice'
+import { Typography, Button } from '@material-ui/core'
 
 const Navbar = () => {
     const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const Navbar = () => {
     return (
         <nav>
             <section>
-                <h1>Redux Essentials Example</h1>
+                <Typography variant="h1">Exteractive</Typography>
 
                 <div>
                     <div>
@@ -29,7 +30,7 @@ const Navbar = () => {
                         <Link to="/users">Users</Link>
                         <Link to="/notifications">Notifications {unreadNotificationBadge}</Link>
                     </div>
-                    <button onClick={fetchNewNotifications}>Refresh Notifications</button>
+                    <Button variant="contained" onClick={fetchNewNotifications}>Refresh Notifications</Button>
                 </div>
             </section>
         </nav>

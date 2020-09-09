@@ -5,6 +5,7 @@ import { addStory } from './storiesSlice'
 import { selectAllUsers } from '../users/usersSlice'
 import { useAppDispatch } from '../../app/store'
 import { LoadingStatus } from '../../types/statuses.types'
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/core'
 
 const AddStoryForm = () => {
     const [title, setTitle] = useState('')
@@ -46,33 +47,33 @@ const AddStoryForm = () => {
     }
 
     const usersOptions = users.map(user => (
-        <option key={user._id} value={user._id}>
+        <MenuItem key={user._id} value={user._id}>
             {user.name}
-        </option>
+        </MenuItem>
     ))
 
     return (
         <section>
             <h2>Add a New Story</h2>
             <form>
-                <label htmlFor="storyTitle">Story Title:</label>
-                <input
-                    type="text"
-                    id="storyTitle"
-                    name="storyTitle"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
+                <TextField label="Story Title" defaultValue={title} onChange={e => setTitle(e.target.value)} />
+                <FormControl>
+                    <InputLabel>Author</InputLabel>
+                    <Select value={userId} onChange={e => setUserId(e.target.value as string)}>
+                        <MenuItem value="">Please select an author...</MenuItem>
+                        {usersOptions}
+                    </Select>
+                </FormControl>
+                <TextField
+                    label="Content"
+                    defaultValue={text}
+                    onChange={e => setText(e.target.value)}
+                    multiline
+                    rows={10}
                 />
-                <label htmlFor="storyAuthor">Author:</label>
-                <select id="storyAuthor" value={userId} onChange={e => setUserId(e.target.value)}>
-                    <option value=""></option>
-                    {usersOptions}
-                </select>
-                <label htmlFor="storyText">Content:</label>
-                <textarea id="storyText" name="storyText" value={text} onChange={e => setText(e.target.value)} />
-                <button type="button" onClick={onAddStory} disabled={!canSave}>
+                <Button variant="contained" onClick={onAddStory} disabled={!canSave}>
                     Add Story
-                </button>
+                </Button>
             </form>
         </section>
     )

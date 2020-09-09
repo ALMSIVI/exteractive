@@ -4,12 +4,14 @@ import App from './app/App'
 import { Provider } from 'react-redux'
 import store from './app/store'
 import { fetchUsers } from './features/users/usersSlice'
+import {CssBaseline} from '@material-ui/core'
 
 store.dispatch(fetchUsers())
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
+            <CssBaseline />
             <App />
         </Provider>
     </React.StrictMode>,

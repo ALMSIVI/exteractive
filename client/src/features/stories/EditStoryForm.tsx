@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { selectStoryById, storyUpdated } from './storiesSlice'
 import { RootState, useAppDispatch } from '../../app/store'
+import { TextField, Button } from '@material-ui/core'
 
 const EditStoryForm = () => {
     const { storyId } = useParams<{ storyId: string }>()
@@ -26,19 +27,17 @@ const EditStoryForm = () => {
         <section>
             <h2>Edit Story</h2>
             <form>
-                <label htmlFor="storyTitle">Story Title:</label>
-                <input
-                    type="text"
-                    id="storyTitle"
-                    name="storyTitle"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
+                <TextField label="Story Title" defaultValue={title} onChange={e => setTitle(e.target.value)} />
+                <TextField
+                    label="Content"
+                    defaultValue={text}
+                    onChange={e => setText(e.target.value)}
+                    multiline
+                    rows={10}
                 />
-                <label htmlFor="storyText">Content:</label>
-                <textarea id="storyText" name="storyText" value={text} onChange={e => setText(e.target.value)} />
-                <button type="button" onClick={onSaveStory}>
+                <Button variant="contained" onClick={onSaveStory} >
                     Save Story
-                </button>
+                </Button>
             </form>
         </section>
     )
