@@ -15,7 +15,7 @@ describe('Story rendering', () => {
                 { route: '/story/0' }
             )
             await waitFor(() => screen.getByText('Text 0'))
-            expect(screen.getByText('Text 0')).toHaveStyle('color: red')
+            expect(screen.getByText('Text 0')).not.toBeNull()
         } catch (e) {
             expect(e).toBeNull()
         }

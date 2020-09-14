@@ -1,38 +1,126 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 
 import { fetchNotifications, selectAllNotifications } from '../features/notifications/notificationsSlice'
-import { Typography, Button } from '@material-ui/core'
+import { Typography, Button, AppBar, Toolbar, InputBase } from '@material-ui/core'
+import { Search } from '@material-ui/icons'
+import { makeStyles, createStyles, fade, Theme } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        title: {
+            flexGrow: 1,
+            display: 'none',
+            [theme.breakpoints.up('sm')]: {
+                display: 'block',
+            },
+        },
+        search: {
+            position: 'relative',
+            borderRadius: theme.shape.borderRadius,
+            backgroundColor: fade(theme.palette.common.white, 0.15),
+            '&:hover': {
+                backgroundColor: fade(theme.palette.common.white, 0.25),
+            },
+            marginLeft: 0,
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                marginLeft: theme.spacing(1),
+                width: 'auto',
+            },
+        },
+        searchIcon: {
+            padding: theme.spacing(0, 2),
+            height: '100%',
+            position: 'absolute',
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        inputRoot: {
+            color: 'inherit',
+        },
+        inputInput: {
+            padding: theme.spacing(1, 1, 1, 0),
+            // vertical padding + font size from searchIcon
+            paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+            transition: theme.transitions.create('width'),
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                width: '12ch',
+                '&:focus': {
+                    width: '20ch',
+                },
+            },
+        },
+    })
+)
+
+type NavLinkProps = {
+    to: string
+    children: React.ReactNode
+}
+
 
 const Navbar = () => {
-    const dispatch = useDispatch()
-    const notifications = useSelector(selectAllNotifications)
-    const numUnreadNotifications = notifications.filter(n => !n.read).length
+    const classes = useStyles()
+    //const dispatch = useDispatch()
+    // const notifications = useSelector(selectAllNotifications)
+    // const numUnreadNotifications = notifications.filter(n => !n.read).length
 
-    let unreadNotificationBadge: JSX.Element
-    if (numUnreadNotifications > 0) {
-        unreadNotificationBadge = <span>{numUnreadNotifications}</span>
-    }
+    // let unreadNotificationBadge: JSX.Element
+    // if (numUnreadNotifications > 0) {
+    //     unreadNotificationBadge = <span>{numUnreadNotifications}</span>
+    // }
 
-    const fetchNewNotifications = () => {
-        dispatch(fetchNotifications())
-    }
+    // const fetchNewNotifications = () => {
+    //     dispatch(fetchNotifications())
+    // }
+
+    // <Link to="/notifications">Notifications {unreadNotificationBadge}</Link>
+    // <Button variant="contained" onClick={fetchNewNotifications}>Refresh Notifications</Button>
+
+
+    const NavLink = ({ to, children }: NavLinkProps) => (
+        <Button component={RouterLink} className={classes.inputRoot} to={to}>
+            {children}
+        </Button>
+    )
 
     return (
-        <nav>
-            <section>
-                <Typography variant="h1">Exteractive</Typography>
-
-                <div>
-                    <div>
-                        <Link to="/">Posts</Link>
-                        <Link to="/users">Users</Link>
-                        <Link to="/notifications">Notifications {unreadNotificationBadge}</Link>
+        <nav className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        Exteractive
+                    </Typography>
+                    <NavLink to="/">
+                        Stories
+                    </NavLink>
+                    <NavLink to="/users">
+                        Users
+                    </NavLink>
+                    <NavLink to="/notifications">Notifications</NavLink>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <Search />
+                        </div>
+                        <InputBase
+                            placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
                     </div>
-                    <Button variant="contained" onClick={fetchNewNotifications}>Refresh Notifications</Button>
-                </div>
-            </section>
+                </Toolbar>
+            </AppBar>
         </nav>
     )
 }

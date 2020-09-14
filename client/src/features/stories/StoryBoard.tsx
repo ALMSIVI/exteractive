@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { css } from '@emotion/core'
+import React from 'react'
 import { Story } from '../../types/stories.types'
 import { useParams, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -30,13 +29,7 @@ const StoryBoard = () => {
                     <StoryAuthor user={story.user} />
                     <TimeAgo timestamp={story.date} />
                 </div>
-                <p
-                    css={css`
-                        color: red;
-                    `}
-                >
-                    {story.text}
-                </p>
+                <p>{story.text}</p>
                 <ReactionButtons story={story} />
                 <Link to={`/story/edit/${story._id}`}>Edit Story</Link>
             </article>
