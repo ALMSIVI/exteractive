@@ -12,8 +12,8 @@ import { Container } from '@material-ui/core'
 
 const App = () => (
     <BrowserRouter>
+        <Navbar />
         <Container>
-            <Navbar />
             <Switch>
                 <Route exact path="/">
                     <Fragment>

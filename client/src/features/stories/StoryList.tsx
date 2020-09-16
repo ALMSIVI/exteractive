@@ -1,18 +1,31 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { selectStoryIds, fetchStories, selectStoryById } from './storiesSlice'
 import { Link } from 'react-router-dom'
+import { Paper, Typography } from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { LoadingStatus } from '../../types/statuses.types'
 import { RootState, useAppDispatch } from '../../app/store'
+import { selectStoryIds, fetchStories, selectStoryById } from './storiesSlice'
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        excerpt: {
+            padding: theme.spacing(1),
+            margin: theme.spacing(1),
+        },
+    })
+)
 
 const StoryExcerpt = ({ storyId }) => {
+    const classes = useStyles()
+
     const story = useSelector((state: RootState) => selectStoryById(state, storyId))
     return (
-        <article key={story._id}>
-            <h3>{story.title}</h3>
-            <p>{story.text}</p>
+        <Paper className={classes.excerpt} component="section" key={story._id}>
+            <Typography variant="h5">{story.title}</Typography>
+            <Typography variant="body1">{story.text}</Typography>
             <Link to={`/story/${story._id}`}>View Story</Link>
-        </article>
+        </Paper>
     )
 }
 

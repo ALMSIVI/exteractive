@@ -1,17 +1,13 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
-
 import { fetchNotifications, selectAllNotifications } from '../features/notifications/notificationsSlice'
 import { Typography, Button, AppBar, Toolbar, InputBase } from '@material-ui/core'
-import { Search } from '@material-ui/icons'
 import { makeStyles, createStyles, fade, Theme } from '@material-ui/core/styles'
+import { Search } from '@material-ui/icons'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
-            flexGrow: 1,
-        },
         title: {
             flexGrow: 1,
             display: 'none',
@@ -66,7 +62,6 @@ type NavLinkProps = {
     children: React.ReactNode
 }
 
-
 const Navbar = () => {
     const classes = useStyles()
     //const dispatch = useDispatch()
@@ -85,7 +80,6 @@ const Navbar = () => {
     // <Link to="/notifications">Notifications {unreadNotificationBadge}</Link>
     // <Button variant="contained" onClick={fetchNewNotifications}>Refresh Notifications</Button>
 
-
     const NavLink = ({ to, children }: NavLinkProps) => (
         <Button component={RouterLink} className={classes.inputRoot} to={to}>
             {children}
@@ -93,18 +87,14 @@ const Navbar = () => {
     )
 
     return (
-        <nav className={classes.root}>
+        <nav>
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
                         Exteractive
                     </Typography>
-                    <NavLink to="/">
-                        Stories
-                    </NavLink>
-                    <NavLink to="/users">
-                        Users
-                    </NavLink>
+                    <NavLink to="/">Stories</NavLink>
+                    <NavLink to="/users">Users</NavLink>
                     <NavLink to="/notifications">Notifications</NavLink>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
