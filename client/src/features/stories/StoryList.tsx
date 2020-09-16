@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(1),
             margin: theme.spacing(1),
         },
+        title: {
+            marginTop: theme.spacing(2)
+        }
     })
 )
 
@@ -30,6 +33,8 @@ const StoryExcerpt = ({ storyId }) => {
 }
 
 const StoryList = () => {
+    const classes = useStyles()
+
     const dispatch = useAppDispatch()
     const storyIds = useSelector(selectStoryIds)
     const loadingStatus = useSelector((state: RootState) => state.stories.status)
@@ -52,7 +57,7 @@ const StoryList = () => {
 
     return (
         <section>
-            <h2>Stories</h2>
+            <Typography className={classes.title} variant="h4">Stories</Typography>
             {content}
         </section>
     )

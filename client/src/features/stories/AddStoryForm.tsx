@@ -56,16 +56,26 @@ const AddStoryForm = () => {
         <section>
             <h2>Add a New Story</h2>
             <form>
-                <TextField label="Story Title" defaultValue={title} onChange={e => setTitle(e.target.value)} />
-                <FormControl>
-                    <InputLabel>Author</InputLabel>
-                    <Select value={userId} onChange={e => setUserId(e.target.value as string)}>
+                <TextField
+                    label="Story Title"
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    defaultValue={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                <FormControl variant="outlined" fullWidth margin="normal">
+                    <InputLabel id="author-label">Author</InputLabel>
+                    <Select labelId="author-label" label="Author" value={userId} onChange={e => setUserId(e.target.value as string)}>
                         <MenuItem value="">Please select an author...</MenuItem>
                         {usersOptions}
                     </Select>
                 </FormControl>
                 <TextField
                     label="Content"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
                     defaultValue={text}
                     onChange={e => setText(e.target.value)}
                     multiline

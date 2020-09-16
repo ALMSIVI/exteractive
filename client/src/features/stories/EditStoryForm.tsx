@@ -27,15 +27,25 @@ const EditStoryForm = () => {
         <section>
             <h2>Edit Story</h2>
             <form>
-                <TextField label="Story Title" defaultValue={title} onChange={e => setTitle(e.target.value)} />
                 <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    label="Story Title"
+                    defaultValue={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
                     label="Content"
                     defaultValue={text}
                     onChange={e => setText(e.target.value)}
                     multiline
                     rows={10}
                 />
-                <Button variant="contained" onClick={onSaveStory} >
+                <Button variant="contained" onClick={onSaveStory}>
                     Save Story
                 </Button>
             </form>
