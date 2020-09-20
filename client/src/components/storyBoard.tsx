@@ -1,5 +1,5 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { css } from '@emotion/core'
 import { Story } from '../types/stories.types'
 
 const StoryBoard = () => {
@@ -8,8 +8,8 @@ const StoryBoard = () => {
 
     useEffect(() => {
         const fetchStory = async () => {
-            const res = await fetch('/api/stories/root')
-            const story: Story = await res.json()
+            const res = await axios.get('/api/stories/root')
+            const story: Story = res.data
             setTitle(story.title)
             setText(story.text)
         }
@@ -20,13 +20,7 @@ const StoryBoard = () => {
     return (
         <div>
             <h1>{title}</h1>
-            <p
-                css={css`
-                    color: red;
-                `}
-            >
-                {text}
-            </p>
+            <p>{text}</p>
         </div>
     )
 }
