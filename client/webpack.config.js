@@ -15,29 +15,32 @@ module.exports = {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'html-loader'
-                }
-            }
+                    loader: 'html-loader',
+                },
+            },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
-            filename: './index.html'
-        })
+            filename: './index.html',
+        }),
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     devServer: {
         compress: true,
+        historyApiFallback: true,
+        open: false,
         clientLogLevel: 'silent',
         port: 3000,
         proxy: {
-            '/api': 'http://localhost:3001'
-        }
+            '/api': 'http://localhost:3001',
+        },
     },
     output: {
-        path: path.resolve(__dirname, '../server/dist/client')
-    }
+        path: path.resolve(__dirname, '../server/dist/client'),
+        publicPath: '/',
+    },
 }

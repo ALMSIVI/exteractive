@@ -1,7 +1,8 @@
 export interface Story {
-    id: string
+    _id?: string
     title: string
     text: string
     parent: string
-    children: string[]
+    depth: number
+    date: string
 }

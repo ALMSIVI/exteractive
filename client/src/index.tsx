@@ -1,6 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import StoryBoard from './components/storyBoard'
+import App from './app/App'
+import { CssBaseline } from '@material-ui/core'
 
-console.log('abcde')
-ReactDOM.render(<StoryBoard />, document.getElementById('container'))
+ReactDOM.render(
+    <React.StrictMode>
+        <CssBaseline />
+        <App />
+    </React.StrictMode>,
+    document.getElementById('container')
+)
