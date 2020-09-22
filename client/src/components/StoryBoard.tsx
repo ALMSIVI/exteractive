@@ -52,23 +52,21 @@ const StoryBoard = () => {
         content = <CircularProgress className={classes.progress} />
     } else {
         content = (
-            <React.Fragment>
+            <article>
                 <Typography variant="h5" component="h1">
                     {story.title}
                 </Typography>
                 <div>
                     <TimeAgo timestamp={story.date} />
                 </div>
-                <p>{story.text}</p>
-            </React.Fragment>
+                <main>
+                    <p>{story.text}</p>
+                </main>
+            </article>
         )
     }
 
-    return (
-        <Paper component="article" className={classes.root}>
-            {content}
-        </Paper>
-    )
+    return <Paper className={classes.root}>{content}</Paper>
 }
 
 export default StoryBoard

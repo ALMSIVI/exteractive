@@ -13,6 +13,10 @@ const stories: Story[] = [
 ]
 
 const handlers = [
+    rest.get('/api/stories/recent', (_, res, ctx) => {
+        return res(ctx.json(stories))
+    }),
+
     rest.get('/api/stories/story/:storyId', (req, res, ctx) => {
         const { storyId } = req.params
         return res(ctx.json(stories.find(story => story._id === storyId)))

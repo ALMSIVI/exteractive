@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const StoryExcerpt = ({ story }: { story: Story }) => {
     const classes = useStyles()
     return (
-        <Paper className={classes.excerpt} component="section" key={story._id}>
+        <Paper className={classes.excerpt} component="article" key={story._id} role="listitem">
             <Typography variant="h5">{story.title}</Typography>
             <Typography variant="body1">{story.text}</Typography>
             <Link to={`/story/${story._id}`}>View Story</Link>
@@ -50,13 +50,19 @@ const StoryList = () => {
         fetchRecent()
     }, [])
 
-    let content: JSX.Element | JSX.Element[]
+    let content: JSX.Element
     if (loading) {
         content = <div>Loading...</div>
     } else if (error !== '') {
         content = <div>{error}</div>
     } else {
-        content = stories.map(story => <StoryExcerpt key={story._id} story={story} />)
+        content = (
+            <div role="list">
+                {stories.map(story => (
+                    <StoryExcerpt key={story._id} story={story} />
+                ))}
+            </div>
+        )
     }
 
     return (
