@@ -1,5 +1,6 @@
 import { Db, Collection, ObjectId } from 'mongodb'
 import { Story } from '../types/stories.types'
+import { DbResponse } from '../types/response.types'
 import pino from 'pino'
 
 let stories: Collection
@@ -10,34 +11,37 @@ export default class StoriesDAO {
         stories = db.collection('stories')
     }
 
-    static async getRoot(): Promise<Story> {
+    static async getRoot(): Promise<DbResponse<Story>> {
         try {
-            return await stories.findOne({ parent: { $type: 'null' } })
+            const data: Story = await stories.findOne({ parent: { $type: 'null' } })
+            return { success: true, data }
         } catch (e) {
             logger.error(`Error in fetching root story: ${e}`)
-            return null
+            return { success: false }
         }
     }
 
-    static async getStoryById(id: string): Promise<Story> {
+    static async getStoryById(id: string): Promise<DbResponse<Story>> {
         try {
-            return await stories.findOne({ _id: new ObjectId(id) })
+            const data: Story = await stories.findOne({ _id: new ObjectId(id) })
+            return { success: true, data }
         } catch (e) {
             logger.error(`Error in fetching story ${id}: ${e}`)
-            return null
+            return { success: false }
         }
     }
 
-    static async getChildren(id: string): Promise<Story[]> {
+    static async getChildren(id: string): Promise<DbResponse<Story[]>> {
         try {
-            return await stories.find({ parent: new ObjectId(id) }).toArray()
+            const data: Story[] = await stories.find({ parent: new ObjectId(id) }).toArray()
+            return { success: true, data }
         } catch (e) {
             logger.error(`Error in getting children of ${id}: ${e}`)
-            return null
+            return { success: false }
         }
     }
 
-    static async getTree(id: string): Promise<Story[]> {
+    static async getTree(id: string): Promise<DbResponse<Story[]>> {
         try {
             const treeWrappers: { tree: Story[] }[] = await stories
                 .aggregate([
@@ -59,19 +63,20 @@ export default class StoriesDAO {
 
             const tree = treeWrappers[0].tree
             tree.sort((s1, s2) => s1.depth - s2.depth)
-            return tree
+            return { success: true, data: tree }
         } catch (e) {
             logger.error(`Error in getting tree of ${id}: ${e}`)
-            return null
+            return { success: false }
         }
     }
 
-    static async getRecent(): Promise<Story[]> {
+    static async getRecent(): Promise<DbResponse<Story[]>> {
         try {
-            return await stories.find({}, { limit: 10, sort: { date: -1 } }).toArray()
+            const data: Story[] = await stories.find({}, { limit: 10, sort: { date: -1 } }).toArray()
+            return { success: true, data }
         } catch (e) {
             logger.error(`Error in getting recent stories: ${e}`)
-            return null
+            return { success: false }
         }
     }
 }
