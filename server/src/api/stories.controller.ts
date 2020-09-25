@@ -58,4 +58,32 @@ export default class StoriesController {
 
         res.json(dbRes.data)
     }
+
+    static async apiAdd(req: Request, res: Response): Promise<void> {
+        const story: Story = req.body
+        const dbRes: DbResponse<Story> = await StoriesDAO.add(story)
+        if (!dbRes.success) {
+            res.status(500)
+        }
+        res.json(dbRes.data)
+    }
+
+    static async apiDelete(req: Request, res: Response): Promise<void> {
+        const storyId: string = req.params.id
+        const dbRes: DbResponse<boolean> = await StoriesDAO.delete(storyId)
+        if (!dbRes.success) {
+            res.status(500)
+        }
+        res.json(dbRes.data)
+    }
+
+    static async apiUpdate(req: Request, res: Response): Promise<void> {
+        const storyId: string = req.params.id
+        const story: Story = req.body
+        const dbRes: DbResponse<boolean> = await StoriesDAO.update(storyId, story)
+        if (!dbRes.success) {
+            res.status(500)
+        }
+        res.json(dbRes.data)
+    }
 }

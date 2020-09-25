@@ -9,7 +9,7 @@ import pino from 'pino'
     const logger = pino()
 
     try {
-        const client: MongoClient = await MongoClient.connect(process.env.DB_URI)
+        const client: MongoClient = await MongoClient.connect(process.env.DB_URI, { useUnifiedTopology: true })
         const db: Db = client.db('exteractive')
 
         StoriesDAO.inject(db)

@@ -79,4 +79,37 @@ export default class StoriesDAO {
             return { success: false }
         }
     }
+
+    static async add(story: Story): Promise<DbResponse<Story>> {
+        try {
+            const resp = await stories.insertOne(story)
+            return { success: true, data: resp.ops[0] }
+        } catch (e) {
+            logger.error(`Error in adding story: ${e}`)
+            return { success: false }
+        }
+    }
+
+    static async delete(storyId: string): Promise<DbResponse<boolean>> {
+        try {
+            const resp = await stories.deleteOne({ _id: new ObjectId(storyId) })
+            return { success: true, data: resp.result.ok === 1 && resp.result.n === 1 }
+        } catch (e) {
+            logger.error(`Error in deleting story: ${e}`)
+            return { success: false }
+        }
+    }
+
+    static async update(storyId: string, story: Story): Promise<DbResponse<boolean>> {
+        try {
+            const resp = await stories.updateOne(
+                { _id: new ObjectId(storyId) },
+                { $set: { title: story.title, text: story.text, date: story.date } }
+            )
+            return { success: true, data: resp.result.ok === 1 && resp.result.nModified === 1 }
+        } catch (e) {
+            logger.error(`Error in deleting story: ${e}`)
+            return { success: false }
+        }
+    }
 }
