@@ -1,6 +1,6 @@
-import { MongoClient } from "mongodb"
+import dotenv from 'dotenv'
 
 export default async function () {
     console.log('Setting up connection')
-    require('dotenv').config()
+    dotenv.config()
 }

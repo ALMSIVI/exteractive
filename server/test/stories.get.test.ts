@@ -11,7 +11,7 @@ describe('Getting stories', () => {
         try {
             const dbRes = await StoriesDAO.getRoot()
             expect(dbRes.success).toBe(true)
-            expect(dbRes.data.title).toBe('The Beginning')
+            expect(dbRes.data.title).toBe('Root Story')
         } catch (e) {
             expect(e).toBeNull()
         }
@@ -21,7 +21,7 @@ describe('Getting stories', () => {
         try {
             const dbRes = await StoriesDAO.getStoryById('5f3603b0b6372b04780a6b4a')
             expect(dbRes.success).toBe(true)
-            expect(dbRes.data.title).toBe('Fantasy')
+            expect(dbRes.data.title).toBe('First Child')
             expect(dbRes.data.parent).toEqual(new ObjectId('5f34de2b3ab21d58636a1103'))
         } catch (e) {
             expect(e).toBeNull()
@@ -51,12 +51,12 @@ describe('Getting stories', () => {
         try {
             let dbRes = await StoriesDAO.getChildren('5f3603b0b6372b04780a6b4a')
             expect(dbRes.success).toBe(true)
-            expect(dbRes.data[0].title).toBe('Country')
+            expect(dbRes.data[0].title).toBe('First Child of 1')
             dbRes = await StoriesDAO.getTree(dbRes.data[0]._id.toHexString())
             expect(dbRes.success).toBe(true)
             expect(dbRes.data).toHaveLength(2)
-            expect(dbRes.data[0].title).toBe('The Beginning')
-            expect(dbRes.data[1].title).toBe('Fantasy')
+            expect(dbRes.data[0].title).toBe('Root Story')
+            expect(dbRes.data[1].title).toBe('First Child')
         } catch (e) {
             expect(e).toBeNull()
         }

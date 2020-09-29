@@ -1,0 +1,42 @@
+[
+    {
+        "_id": "5f34de2b3ab21d58636a1103",
+        "title": "Root Story",
+        "text": "Root Text",
+        "parent": null,
+        "depth": 0,
+        "date": "2020-01-01T08:00:00.000Z"
+    },
+    {
+        "_id": "5f3603b0b6372b04780a6b4a",
+        "title": "First Child",
+        "text": "First Text",
+        "parent": "5f34de2b3ab21d58636a1103",
+        "depth": 1,
+        "date": "2020-01-02T08:00:00.000Z"
+    },
+    {
+        "_id": "5f3603b0b6372b04780a6b4b",
+        "title": "Second Child",
+        "text": "Second Text",
+        "parent": "5f34de2b3ab21d58636a1103",
+        "depth": 1,
+        "date": "2020-01-03T08:00:00.000Z"
+    },
+    {
+        "_id": "5f3603b0b6372b04780a6b4c",
+        "title": "Third Child",
+        "text": "Third Text",
+        "parent": "5f34de2b3ab21d58636a1103",
+        "depth": 1,
+        "date": "2020-01-04T08:00:00.000Z"
+    },
+    {
+        "_id": "5f3603b0b6372b04780a6b4d",
+        "title": "First Child of 1",
+        "text": "First Text of 1",
+        "parent": "5f3603b0b6372b04780a6b4a",
+        "depth": 2,
+        "date": "2020-01-05T08:00:00.000Z"
+    }
+]

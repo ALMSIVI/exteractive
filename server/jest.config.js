@@ -1,6 +1,7 @@
 module.exports = {
     preset: 'ts-jest',
-    globalSetup: './test/config/setup.ts',
-    globalTeardown: './test/config/teardown.ts',
-    testEnvironment: './test/config/mongoEnv.js',
+    globalSetup: '<rootDir>/test/config/setup.ts',
+    globalTeardown: '<rootDir>/test/config/teardown.ts',
+    testEnvironment: '<rootDir>/test/config/mongoEnv.js',
+    setupFilesAfterEnv: ['<rootDir>/test/config/setupData.ts'],
 }
