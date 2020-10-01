@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import StoryList from '../components/StoryList'
-import StoryBoard from '../components/StoryBoard'
+import SingleStoryPage from '../components/SingleStoryPage'
 import Navbar from './Navbar'
 import { Container } from '@material-ui/core'
 
@@ -14,7 +14,7 @@ const App = () => (
                     <StoryList />
                 </Route>
                 <Route exact path="/story/:storyId">
-                    <StoryBoard />
+                    <SingleStoryPage />
                 </Route>
             </Switch>
         </Container>

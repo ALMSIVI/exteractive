@@ -1,6 +1,4 @@
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 import { CircularProgress, Paper, Typography } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Story } from '../types/stories.types'
@@ -19,33 +17,13 @@ const useStyles = makeStyles(
     })
 )
 
-const StoryBoard = () => {
-    const { storyId } = useParams<{ storyId: string }>()
+type StoryBoardProps = {
+    story: Story
+    loading: boolean
+}
+
+const StoryBoard = ({ story, loading }: StoryBoardProps) => {
     const classes = useStyles()
-    const [loading, setLoading] = useState(true)
-    const [story, setStory] = useState<Story>({
-        title: 'Story Title',
-        text: 'Story Text',
-        parent: '0',
-        depth: -1,
-        date: new Date().toISOString(),
-    })
-
-    useEffect(() => {
-        const fetchStory = async () => {
-            try {
-                const res = await axios.get(`/api/stories/story/${storyId}`)
-                const newStory: Story = res.data
-                setStory(newStory)
-            } catch (e) {
-                setStory({ ...story, title: 'Error', text: 'Cannot find story' })
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchStory()
-    }, [])
 
     let content: JSX.Element
     if (loading) {

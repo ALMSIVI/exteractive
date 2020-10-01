@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, waitFor } from './config/test-utils'
 import { Route } from 'react-router-dom'
-import StoryBoard from '../src/components/StoryBoard'
+import SingleStoryPage from '../src/components/SingleStoryPage'
 import StoryList from '../src/components/StoryList'
 
 describe('Story rendering', () => {
@@ -9,7 +9,7 @@ describe('Story rendering', () => {
         try {
             render(
                 <Route path="/story/:storyId">
-                    <StoryBoard />
+                    <SingleStoryPage />
                 </Route>,
                 { route: '/story/0' }
             )
