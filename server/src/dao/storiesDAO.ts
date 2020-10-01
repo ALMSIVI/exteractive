@@ -95,7 +95,7 @@ export default class StoriesDAO {
             const resp = await stories.deleteOne({ _id: new ObjectId(storyId) })
             return { success: true, data: resp.result.ok === 1 && resp.result.n === 1 }
         } catch (e) {
-            logger.error(`Error in deleting story: ${e}`)
+            logger.error(`Error in deleting story ${storyId}: ${e}`)
             return { success: false }
         }
     }
@@ -108,7 +108,7 @@ export default class StoriesDAO {
             )
             return { success: true, data: resp.result.ok === 1 && resp.result.nModified === 1 }
         } catch (e) {
-            logger.error(`Error in deleting story: ${e}`)
+            logger.error(`Error in updaintg story ${storyId}: ${e}`)
             return { success: false }
         }
     }

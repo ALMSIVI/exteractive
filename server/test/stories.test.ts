@@ -74,4 +74,51 @@ describe('Getting stories', () => {
             expect(e).toBeNull()
         }
     })
+
+    test('Stories can be added, updated and deleted', async () => {
+        const newStory = {
+            title: 'New Story',
+            text: 'New Text',
+            parent: new ObjectId('5f34de2b3ab21d58636a1103'),
+            depth: 1,
+            date: new Date(),
+        }
+        const addRes = await StoriesDAO.add(newStory)
+        expect(addRes.success).toBe(true)
+        expect(addRes.data.title).toEqual('New Story')
+
+        const id = addRes.data._id.toHexString()
+        newStory.title = 'Updated Story'
+        const updateRes = await StoriesDAO.update(id, newStory)
+        expect(updateRes.success).toBe(true)
+        expect(updateRes.data).toBe(true)
+
+        const deleteRes = await StoriesDAO.delete(id)
+        expect(deleteRes.success).toBe(true)
+        expect(deleteRes.data).toBe(true)
+    })
+
+    test('Errors for update and delete can be handled', async () => {
+        const nonexistentStory = {
+            title: 'Nonexistent Story',
+            text: 'Nonexistent Text',
+            parent: new ObjectId('5f34de2b3ab21d58636a1103'),
+            depth: 1,
+            date: new Date(),
+        }
+
+        let dbRes = await StoriesDAO.update('ffffffffffffffffffffffff', nonexistentStory)
+        expect(dbRes.success).toBe(true)
+        expect(dbRes.data).toBe(false)
+
+        dbRes = await StoriesDAO.update('f', nonexistentStory)
+        expect(dbRes.success).toBe(false)
+
+        dbRes = await StoriesDAO.delete('ffffffffffffffffffffffff')
+        expect(dbRes.success).toBe(true)
+        expect(dbRes.data).toBe(false)
+
+        dbRes = await StoriesDAO.delete('f')
+        expect(dbRes.success).toBe(false)
+    })
 })
