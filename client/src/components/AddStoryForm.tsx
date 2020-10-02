@@ -46,7 +46,7 @@ const AddStoryForm = ({ parent }: AddStoryFormProps) => {
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    defaultValue={title}
+                    value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
                 <TextField
@@ -54,7 +54,7 @@ const AddStoryForm = ({ parent }: AddStoryFormProps) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    defaultValue={text}
+                    value={text}
                     onChange={e => setText(e.target.value)}
                     multiline
                     rows={10}

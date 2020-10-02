@@ -25,8 +25,6 @@ const EditStoryForm = ({ story }: EditStoryFormProps) => {
                     date: new Date().toISOString(),
                 })
 
-                setTitle('')
-                setText('')
                 // TODO: indicate that the save is successful
             } catch (err) {
                 console.error(`Failed to save post: ${err}`)
@@ -45,7 +43,7 @@ const EditStoryForm = ({ story }: EditStoryFormProps) => {
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    defaultValue={title}
+                    value={title}
                     onChange={e => setTitle(e.target.value)}
                 />
                 <TextField
@@ -53,7 +51,7 @@ const EditStoryForm = ({ story }: EditStoryFormProps) => {
                     variant="outlined"
                     fullWidth
                     margin="normal"
-                    defaultValue={text}
+                    value={text}
                     onChange={e => setText(e.target.value)}
                     multiline
                     rows={10}

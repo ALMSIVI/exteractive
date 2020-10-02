@@ -38,7 +38,9 @@ const StoryBoard = ({ story, loading }: StoryBoardProps) => {
                     <TimeAgo timestamp={story.date} />
                 </div>
                 <main>
-                    <p>{story.text}</p>
+                    {story.text.split(/\n+/).map((paragraph, index) => (
+                        <p key={index}>{paragraph}</p>
+                    ))}
                 </main>
             </article>
         )
