@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-type NavLinkProps = {
+interface NavLinkProps {
     to: string
     children: React.ReactNode
 }

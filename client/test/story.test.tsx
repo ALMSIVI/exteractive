@@ -1,19 +1,17 @@
 import React from 'react'
 import { render, screen, waitFor } from './config/test-utils'
 import { Route } from 'react-router-dom'
-import SingleStoryPage from '../src/components/SingleStoryPage'
+import StoryBoard from '../src/components/StoryBoard'
 import StoryList from '../src/components/StoryList'
+import Axios from 'axios'
 
 describe('Story rendering', () => {
     test('Loads and displays story board', async () => {
         try {
-            render(
-                <Route path="/story/:storyId">
-                    <SingleStoryPage />
-                </Route>,
-                { route: '/story/0' }
-            )
-            await waitFor(() => screen.getByRole('article'))
+            const res = await Axios.get('/api/stories/story/0')
+            const story = res.data
+
+            render(<StoryBoard story={story} loading={false} />)
             expect(screen.getByRole('heading')).toHaveTextContent('Test 0')
             expect(screen.getByRole('main')).toHaveTextContent('Text 0')
         } catch (e) {

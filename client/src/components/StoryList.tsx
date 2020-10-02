@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Paper, Typography } from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Axios from 'axios'
 import { Story } from '../types/stories.types'
-import axios from 'axios'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -17,7 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-const StoryExcerpt = ({ story }: { story: Story }) => {
+interface excerptProps {
+    story: Story
+}
+
+const StoryExcerpt = ({ story }: excerptProps) => {
     const classes = useStyles()
     return (
         <Paper className={classes.excerpt} component="article" key={story._id} role="listitem">
@@ -37,7 +41,7 @@ const StoryList = () => {
     useEffect(() => {
         const fetchRecent = async () => {
             try {
-                const res = await axios.get('/api/stories/recent')
+                const res = await Axios.get('/api/stories/recent')
                 const newStories: Story[] = res.data
                 setStories(newStories)
             } catch (e) {

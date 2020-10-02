@@ -7,7 +7,7 @@ import TimeAgo from './TimeAgo'
 const useStyles = makeStyles(
     createStyles({
         root: {
-            margin: '2rem',
+            margin: '2rem 0',
             padding: '1rem',
         },
         progress: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles(
     })
 )
 
-type StoryBoardProps = {
+interface StoryBoardProps {
     story: Story
     loading: boolean
 }
