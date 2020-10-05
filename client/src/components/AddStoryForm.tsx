@@ -38,32 +38,29 @@ const AddStoryForm = ({ parent }: AddStoryFormProps) => {
     }
 
     return (
-        <section>
-            <h2>Write a Sequel</h2>
-            <form>
-                <TextField
-                    label="Story Title"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-                <TextField
-                    label="Content"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    multiline
-                    rows={10}
-                />
-                <Button variant="contained" onClick={onAddStory} disabled={!canSave}>
-                    Add Sequel
-                </Button>
-            </form>
-        </section>
+        <form>
+            <TextField
+                label="Story Title"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+            />
+            <TextField
+                label="Content"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={text}
+                onChange={e => setText(e.target.value)}
+                multiline
+                rows={10}
+            />
+            <Button variant="contained" onClick={onAddStory} disabled={!canSave}>
+                Add Sequel
+            </Button>
+        </form>
     )
 }
 

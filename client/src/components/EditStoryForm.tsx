@@ -35,32 +35,29 @@ const EditStoryForm = ({ story }: EditStoryFormProps) => {
     }
 
     return (
-        <section>
-            <h2>Edit Story</h2>
-            <form>
-                <TextField
-                    label="Story Title"
-                    variant="outlined"
-                    margin="normal"
-                    fullWidth
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-                <TextField
-                    label="Content"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={text}
-                    onChange={e => setText(e.target.value)}
-                    multiline
-                    rows={10}
-                />
-                <Button variant="contained" onClick={onSaveStory} disabled={!canSave}>
-                    Save Story
-                </Button>
-            </form>
-        </section>
+        <form>
+            <TextField
+                label="Story Title"
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+            />
+            <TextField
+                label="Content"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={text}
+                onChange={e => setText(e.target.value)}
+                multiline
+                rows={10}
+            />
+            <Button variant="contained" onClick={onSaveStory} disabled={!canSave}>
+                Save Story
+            </Button>
+        </form>
     )
 }
 
