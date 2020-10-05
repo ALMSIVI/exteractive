@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import bodyParser from 'body-parser'
 import * as path from 'path'
 import stories from './api/stories.route'
+
 const app: Express = express()
 
 app.use(bodyParser.json())

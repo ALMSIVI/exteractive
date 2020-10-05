@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { ObjectId } from 'mongodb'
 import StoriesDAO from '../dao/storiesDAO'
 import { DbResponse } from '../types/response.types'
 import { Story } from '../types/stories.types'
@@ -16,7 +17,13 @@ export default class StoriesController {
     }
 
     static async apiGetStory(req: Request, res: Response): Promise<void> {
-        const dbRes: DbResponse<Story> = await StoriesDAO.getStoryById(req.params.id)
+        const id: string = req.params.id
+        if (id === 'null') {
+            res.status(404).json(null)
+            return
+        }
+
+        const dbRes: DbResponse<Story> = await StoriesDAO.getStoryById(id)
         if (!dbRes.success) {
             res.status(400)
         } else if (dbRes.data === null) {
@@ -61,6 +68,10 @@ export default class StoriesController {
 
     static async apiAdd(req: Request, res: Response): Promise<void> {
         const story: Story = req.body
+        if (typeof story.parent === 'string') {
+            story.parent = new ObjectId(story.parent)
+        }
+
         const dbRes: DbResponse<Story> = await StoriesDAO.add(story)
         if (!dbRes.success) {
             res.status(500)
