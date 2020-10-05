@@ -6,6 +6,8 @@ import { Story } from '../types/stories.types'
 import AddStoryForm from './AddStoryForm'
 import StoryBoard from './StoryBoard'
 import EditStoryForm from './EditStoryForm'
+import ParentStory from './ParentStory'
+import ChildStories from './ChildStories'
 
 interface TabPanelProps {
     children: React.ReactNode
@@ -16,7 +18,7 @@ interface TabPanelProps {
 const TabPanel = ({ children, value, index, ...other }: TabPanelProps) => {
     return (
         <div role="tabpanel" hidden={value !== index} id={`forms-${index}`} {...other}>
-            {value === index && <Box p={3}>{children}</Box>}
+            {value === index && <Box>{children}</Box>}
         </div>
     )
 }
@@ -63,7 +65,9 @@ const SingleStoryPage = () => {
 
     return (
         <>
+            <ParentStory story={story} ready={!loading} />
             <StoryBoard story={story} loading={loading} />
+            <ChildStories story={story} ready={!loading} />
             <Tabs value={value} onChange={(_, val) => setValue(val)}>
                 <Tab label="Write Sequel" />
                 <Tab label="Edit Story" />
