@@ -1,6 +1,7 @@
 import React from 'react'
 import { CircularProgress, Paper, Typography } from '@material-ui/core'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
+import ReactMarkdown from 'react-markdown'
 import { Story } from '../types/stories.types'
 import TimeAgo from './TimeAgo'
 
@@ -38,9 +39,7 @@ const StoryBoard = ({ story, loading }: StoryBoardProps) => {
                     <TimeAgo timestamp={story.date} />
                 </div>
                 <main>
-                    {story.text.split(/\n+/).map((paragraph, index) => (
-                        <p key={index}>{paragraph}</p>
-                    ))}
+                    <ReactMarkdown source={story.text} />
                 </main>
             </article>
         )

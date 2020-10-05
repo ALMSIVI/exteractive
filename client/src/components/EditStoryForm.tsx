@@ -45,7 +45,7 @@ const EditStoryForm = ({ story }: EditStoryFormProps) => {
                 onChange={e => setTitle(e.target.value)}
             />
             <TextField
-                label="Content"
+                label="Content (supports Markdown)"
                 variant="outlined"
                 fullWidth
                 margin="normal"
