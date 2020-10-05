@@ -11,6 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.resolve(__dirname, 'client')))
 app.use('/api/stories', stories)
 
-app.get('*', (_, res) => res.sendFile(path.resolve(__dirname, 'index.html')))
+app.get('*', (_, res) => res.sendFile(path.resolve(__dirname, 'client/index.html')))
 
 export default app
