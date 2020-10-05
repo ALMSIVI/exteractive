@@ -1,6 +1,6 @@
 import React from 'react'
 import { CircularProgress, Paper, Typography } from '@material-ui/core'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
 import { Story } from '../types/stories.types'
 import TimeAgo from './TimeAgo'
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import Axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import Axios, { AxiosError } from 'axios'
 import { useParams } from 'react-router-dom'
 import { Box, Tab, Tabs } from '@material-ui/core'
 import { Story } from '../types/stories.types'
@@ -37,21 +37,32 @@ const SingleStoryPage = () => {
     useEffect(() => {
         const fetchStory = async () => {
             try {
+                setLoading(true)
                 const res = await Axios.get(`/api/stories/story/${storyId}`)
                 const newStory: Story = res.data
                 setStory(newStory)
             } catch (e) {
-                setStory({ ...story, title: 'Error', text: 'Cannot find story' })
+                const axiosError: AxiosError = e
+                const status = axiosError.response.status
+                let text = axiosError.message
+                
+                if (status === 404) {
+                    text = 'Cannot find story'
+                } else if (status === 400) {
+                    text = 'Invalid story id'
+                }
+
+                setStory({ ...story, title: 'Error', text })
             } finally {
                 setLoading(false)
             }
         }
 
         fetchStory()
-    }, [])
+    }, [storyId])
 
     return (
-        <Fragment>
+        <>
             <StoryBoard story={story} loading={loading} />
             <Tabs value={value} onChange={(_, val) => setValue(val)}>
                 <Tab label="Write Sequel" />
@@ -63,7 +74,7 @@ const SingleStoryPage = () => {
             <TabPanel value={value} index={1}>
                 <EditStoryForm story={story} />
             </TabPanel>
-        </Fragment>
+        </>
     )
 }
 

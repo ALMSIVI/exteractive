@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Typography, Button, AppBar, Toolbar, InputBase } from '@material-ui/core'
 import { makeStyles, createStyles, fade, Theme } from '@material-ui/core/styles'
 import { Search } from '@material-ui/icons'
@@ -64,7 +64,7 @@ const Navbar = () => {
     const classes = useStyles()
 
     const NavLink = ({ to, children }: NavLinkProps) => (
-        <Button component={RouterLink} className={classes.inputRoot} to={to}>
+        <Button component={Link} className={classes.inputRoot} to={to}>
             {children}
         </Button>
     )
